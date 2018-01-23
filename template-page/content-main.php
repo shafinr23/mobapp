@@ -1,5 +1,5 @@
  <div class="client-logos my-5">
-        <div class="container text-center">
+        <div class="container text-center col-lg-4">
             <img src="images/client-logos.png" alt="client logos" class="img-fluid">
         </div>
     </div>
@@ -13,48 +13,45 @@
                 <small>HIGHLIGHTS</small>
                 <h3>Features you love</h3>
             </div>
+            <?php 
+            $features = new WP_Query(array(
+                    'post_type'         =>          'featuers',
+                    'post_per_page'     =>           '3'
 
+            ));
+
+            ?>
 
             <div class="row">
+                     <?php
+                if($features->have_posts()):
+                while($features->have_posts()):$features->the_post();
+                ?>
                 <div class="col-12 col-lg-4">
                     <div class="card features">
                         <div class="card-body">
                             <div class="media">
                                 <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
                                 <div class="media-body">
-                                    <h4 class="card-title">Simple</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque </p>
+                                    <h4 class="card-title"><?php the_title(); ?></h4>
+                                    <p class="card-text"><?php the_content(); ?> </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card features">
-                        <div class="card-body">
-                            <div class="media">
-                                <span class="ti-settings gradient-fill ti-3x mr-3"></span>
-                                <div class="media-body">
-                                    <h4 class="card-title">Customize</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card features">
-                        <div class="card-body">
-                            <div class="media">
-                                <span class="ti-lock gradient-fill ti-3x mr-3"></span>
-                                <div class="media-body">
-                                    <h4 class="card-title">Secure</h4>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
+
+               
             </div>
 
         </div>
@@ -66,17 +63,40 @@
     <div class="section">
 
         <div class="container">
+                <?php 
+            $features = new WP_Query(array(
+                    'post_type'         =>          'post',
+                    'posts_per_page'     =>           '1'
+
+            ));
+
+            ?>
+
+
             <div class="row">
+                <?php
+                if($features->have_posts()):
+                while($features->have_posts()):$features->the_post();
+                ?>
                 <div class="col-lg-6 offset-lg-6">
                     <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
-                    <h2>Discover our App</h2>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel exercitationem eveniet vero maxime ratione </p>
+                    <h2><?php the_title(); ?></h2>
+                    <p class="mb-4"><?php the_content(); ?> </p>
                     <a href="#" class="btn btn-primary">Read more</a>
                 </div>
             </div>
-            <div class="perspective-phone">
-                <img src="../images/perspective.png" alt="perspective phone" class="img-fluid">
-            </div>
+                    <div class="perspective-phone">
+                        <img src="<?php the_post_thumbnail_url(); ?>"alt="perspective phone" class="img-fluid">
+                    </div>
+             <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
         </div>
 
     </div>
@@ -89,83 +109,62 @@
                 <small>FEATURES</small>
                 <h3>Do more with our app</h3>
             </div>
+                
 
-            <ul class="nav nav-tabs nav-justified" role="tablist">
+            <?php 
+            $apps = new WP_Query(array(
+                    'post_type'         =>          'apps',
+                    'posts_per_page'     =>           '4'
+
+            ));
+
+            ?>
+
+
+ <ul class="nav nav-tabs nav-justified" role="tablist">
+
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#communication">Communication</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#schedule">Scheduling</a>
+                    <a class="nav-link active" data-toggle="tab" href="#communication">Communication</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#livechat">Live Chat</a>
-                </li>
+
+
             </ul>
+            <?php
+                if($apps->have_posts()):
+                while($apps->have_posts()):$apps->the_post();
+                ?>
+            
             <div class="tab-content">
+               
+
                 <div class="tab-pane fade show active" id="communication">
                     <div class="d-flex flex-column flex-lg-row">
-                        <img src="../images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <img src="<?php the_post_thumbnail_url(); ?>" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
                         <div>
 
-                            <h2>Communicate with ease</h2>
-                            <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
+                            <h2><?php the_title(); ?></h2>
+                            
+                            <p><?php the_content(); ?>
                             </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
-                            </p>
+                            
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="schedule">
-                    <div class="d-flex flex-column flex-lg-row">
-                        <div>
-                            <h2>Scheduling when you want</h2>
-                            <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
-                            </p>
-                        </div>
-                        <img src="../images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="messages">
-                    <div class="d-flex flex-column flex-lg-row">
-                        <img src="../images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
-                        <div>
-                            <h2>Realtime Messaging service</h2>
-                            <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="livechat">
-                    <div class="d-flex flex-column flex-lg-row">
-                        <div>
-                            <h2>Live chat when you needed</h2>
-                            <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
-                            </p>
-                        </div>
-                        <img src="../images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
-                    </div>
-                </div>
+
+                <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
+
             </div>
 
 
@@ -176,17 +175,46 @@
     <div class="section">
 
         <div class="container">
+            <?php 
+            $features = new WP_Query(array(
+                    'post_type'         =>          'post',
+                    'posts_per_page'     =>           '1',
+                    'offset'            =>             '2'
+
+            ));
+
+            ?>
             <div class="row">
+
+<?php
+                if($features->have_posts()):
+                while($features->have_posts()):$features->the_post();
+                ?>
+
+
                 <div class="col-md-6">
-                    <img src="../images/dualphone.png" alt="dual phone" class="img-fluid">
+                    <img src="<?php the_post_thumbnail_url(); ?>" alt="dual phone" class="img-fluid">
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div>
                         <div class="box-icon"><span class="ti-rocket gradient-fill ti-3x"></span></div>
-                        <h2>Launch your App</h2>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati vel exercitationem eveniet vero maxime ratione </p>
+                        <h2><?php the_title(); ?></h2>
+                    <p class="mb-4"><?php the_content(); ?> </p>
                         <a href="#" class="btn btn-primary">Read more</a></div>
                 </div>
+
+ <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
+
+
             </div>
 
         </div>
@@ -195,33 +223,52 @@
     <!-- // end .section -->
 
 
+
+
+
+
+
     <div class="section light-bg">
 
         <div class="container">
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
                     <ul class="list-unstyled ui-steps">
+            <?php 
+            $setps = new WP_Query(array(
+                    'post_type'         =>          'steps',
+                    'posts_per_page'     =>           '3',
+
+
+            ));
+            if($setps->have_posts()):
+                while($setps->have_posts()):$setps->the_post();
+
+            ?>
+
                         <li class="media">
                             <div class="circle-icon mr-4">1</div>
                             <div class="media-body">
-                                <h5>Create an Account</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium obcaecati vel exercitationem </p>
+                                <h5><?php the_title(); ?></h5>
+                                <p><?php the_content(); ?> </p>
                             </div>
                         </li>
-                        <li class="media my-4">
-                            <div class="circle-icon mr-4">2</div>
-                            <div class="media-body">
-                                <h5>Share with friends</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium obcaecati vel exercitationem eveniet</p>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="circle-icon mr-4">3</div>
-                            <div class="media-body">
-                                <h5>Enjoy your life</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium obcaecati vel exercitationem </p>
-                            </div>
-                        </li>
+
+
+            <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
+
+                        
+
+
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -242,26 +289,40 @@
                 <small>TESTIMONIALS</small>
                 <h3>What our Customers Says</h3>
             </div>
+            <?php 
+            $setps = new WP_Query(array(
+                    'post_type'         =>          'cliant',
+                    'posts_per_page'     =>           '3',
+
+
+            ));?>
 
             <div class="testimonials owl-carousel">
+                <?php  if($setps->have_posts()):
+                while($setps->have_posts()):$setps->the_post();
+
+            ?>
+
+
                 <div class="testimonials-single">
-                    <img src="../images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives. Conveniently embrace multifunctional ideas through proactive customer service. Distinctively conceptualize 2.0 intellectual capital via user-centric partnerships.</blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
+                    <img src="<?php the_post_thumbnail_url(); ?>" alt="client" class="client-img">
+                    <blockquote class="blockquote"><?php the_content(); ?> </blockquote>
+                    <h5 class="mt-4 mb-2"><?php the_title(); ?></h5>
                     <p class="text-primary">United States</p>
                 </div>
-                <div class="testimonials-single">
-                    <img src="../images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives. Conveniently embrace multifunctional ideas through proactive customer service. Distinctively conceptualize 2.0 intellectual capital via user-centric partnerships.</blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
-                    <p class="text-primary">United States</p>
-                </div>
-                <div class="testimonials-single">
-                    <img src="../images/client.png" alt="client" class="client-img">
-                    <blockquote class="blockquote">Uniquely streamline highly efficient scenarios and 24/7 initiatives. Conveniently embrace multifunctional ideas through proactive customer service. Distinctively conceptualize 2.0 intellectual capital via user-centric partnerships.</blockquote>
-                    <h5 class="mt-4 mb-2">Crystal Gordon</h5>
-                    <p class="text-primary">United States</p>
-                </div>
+                    <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
+
+                
+                
             </div>
 
         </div>
@@ -276,12 +337,29 @@
                 <small>GALLERY</small>
                 <h3>App Screenshots</h3>
             </div>
+            <?php 
+            $setps = new WP_Query(array(
+                    'post_type'         =>          'GALLERY',
+ 
 
+
+            ));?>
             <div class="img-gallery owl-carousel owl-theme">
-                <img src="../images/screen1.jpg" alt="image">
-                <img src="../images/screen2.jpg" alt="image">
-                <img src="../images/screen3.jpg" alt="image">
-                <img src="../images/screen1.jpg" alt="image">
+<?php  if($setps->have_posts()):
+                while($setps->have_posts()):$setps->the_post();
+
+            ?>
+                <img src="<?php the_post_thumbnail_url(); ?>" alt="image">
+                <?php
+                //echo '<h1>'.get_the_title().'</h1></br>';
+               // echo '<p>'.the_content().'</p></br>';
+                endwhile;
+                 wp_reset_postdata();
+                else:
+                 echo 'nothing found';
+                endif;
+                ?>
+
             </div>
 
         </div>
@@ -301,10 +379,29 @@
             </div>
 
             <div class="card-deck">
-                <div class="card pricing">
+
+
+<?php 
+       
+            $price = new WP_Query(array(
+                    'post_type'         =>          'price',
+                    'posts_per_page'     =>           '3',
+ 
+
+
+            ));
+             $counter = 0;
+            if( $price->have_posts() ) : 
+                while( $price->have_posts() ) : $price->the_post(); $counter++;
+
+                 //We are in loop so we can check if counter is odd or even
+            if( $counter % 2 == 0 ) : //It's even
+
+                ?>
+                <div class="card pricing popular">
                     <div class="card-head">
-                        <small class="text-primary">PERSONAL</small>
-                        <span class="price">$14<sub>/m</sub></span>
+                        <small class="text-primary"><?php the_title(); ?></small>
+                        <span class="price"><?php the_content(); ?><sub>/m</sub></span>
                     </div>
                     <ul class="list-group list-group-flush">
                         <div class="list-group-item">10 Projects</div>
@@ -317,10 +414,12 @@
                         <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
                     </div>
                 </div>
-                <div class="card pricing popular">
+            <?php else: //It's odd?>
+                
+            <div class="card pricing ">
                     <div class="card-head">
-                        <small class="text-primary">FOR TEAMS</small>
-                        <span class="price">$29<sub>/m</sub></span>
+                        <small class="text-primary"><?php the_title(); ?></small>
+                        <span class="price"><?php the_content(); ?><sub>/m</sub></span>
                     </div>
                     <ul class="list-group list-group-flush">
                         <div class="list-group-item">Unlimited Projects</div>
@@ -333,22 +432,24 @@
                         <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
                     </div>
                 </div>
-                <div class="card pricing">
-                    <div class="card-head">
-                        <small class="text-primary">ENTERPRISE</small>
-                        <span class="price">$249<sub>/m</sub></span>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <div class="list-group-item">Unlimited Projects</div>
-                        <div class="list-group-item">Unlimited Storage</div>
-                        <div class="list-group-item">Collaboration</div>
-                        <div class="list-group-item">Reports and analytics</div>
-                        <div class="list-group-item">Web hooks</div>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
-                    </div>
-                </div>
+
+            <?php
+            endif;
+
+     
+
+        endwhile; wp_reset_postdata(); endif;       
+
+                
+            ?>
+
+
+           
+
+
+
+
+
             </div>
             <!-- // end .pricing -->
 
@@ -367,6 +468,7 @@
             </div>
 
             <div class="row pt-4">
+                
                 <div class="col-md-6">
                     <h4 class="mb-3">Can I try before I buy?</h4>
                     <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
