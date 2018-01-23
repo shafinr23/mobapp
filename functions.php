@@ -18,10 +18,11 @@ function all_function(){
 
 
 
+		wp_enqueue_script('js',get_template_directory_uri().'/assets/js/jquery-3.2.1.min.js');
 		wp_enqueue_script('bootstrap',get_template_directory_uri().'/assets/js/bootstrap.bundle.min.js');
 		wp_enqueue_script('carousel',get_template_directory_uri().'/assets/js/owl.carousel.min.js');
 		wp_enqueue_script('script',get_template_directory_uri().'/assets/js/script.js');
-		wp_enqueue_script('jquery',get_template_directory_uri().'/assets/js/jquery-3.2.1.min.js');
+		
 		}
 	}
 
